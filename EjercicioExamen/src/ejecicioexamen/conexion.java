@@ -76,6 +76,22 @@ public class conexion {
          return grasa;
      }
      
+      public static int buscarComponentes2(String cod) throws SQLException{
+
+        Connection con = conexion;
+        String consulta = "select * from componentes where codc=?";
+        PreparedStatement stmt= con.prepareStatement(consulta);
+        stmt.setString(1,cod);
+        ResultSet rs = stmt.executeQuery();
+        
+        int grasa = 0;
+         while (rs.next()) {
+            grasa = rs.getInt("graxa");
+              }
+         return grasa;
+     }
+     
+     
     public static void main(String[] args) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, XMLStreamException {
        //codigo aqui
         

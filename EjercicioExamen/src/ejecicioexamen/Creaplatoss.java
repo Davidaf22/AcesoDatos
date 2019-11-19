@@ -4,7 +4,7 @@ import java.io.*;
 public class Creaplatoss {
 
     public static void main(String args[]) {
-   /* // Object serialization
+   // Object serialization
      String[] codes={"p1","p2"};
      String[] descricion ={"platocarnico1","platocarnico2 "};
 
@@ -34,7 +34,8 @@ public class Creaplatoss {
     catch(Exception e) {
     System.out.println("Exception during serialization: " + e);
     }
-    System.out.println("LE PLATOSS");
+        
+    /*System.out.println("LE PLATOSS");
     try {
     Platos object2;
     FileInputStream fis = new FileInputStream("platos2");
