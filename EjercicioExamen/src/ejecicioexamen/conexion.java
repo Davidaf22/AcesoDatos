@@ -91,11 +91,71 @@ public class conexion {
          return grasa;
      }
      
-     
-    public static void main(String[] args) throws FileNotFoundException, IOException, SQLException, ClassNotFoundException, XMLStreamException {
-       //codigo aqui
+     public static void isertarXerado(String codigo,String nombre,String texto, int total) throws SQLException{
+         Connection con = conexion;
+         
+         PreparedStatement stmt = con.prepareStatement("INSERT INTO xerado VALUES (?,?,?,?)");
         
-    }
+        stmt.setString(1,codigo);
+        stmt.setString(2,nombre);
+        stmt.setString(3,texto);
+        stmt.setInt(4,total);
+        
+        stmt.executeUpdate();
+        
+        System.out.println("Xerado insertado");
+     }
+     
+     public static ResultSet buscarNombreUva(String tipo) throws SQLException{
+         
+        Connection con = conexion;
+         
+        String consulta = "select * from uvas where tipo=?";
+        PreparedStatement stmt= con.prepareStatement(consulta);
+        stmt.setString(1,tipo);
+        ResultSet rs = stmt.executeQuery();
+        return rs;   
+     }
+     
+     
+     public static ResultSet buscarDni(String dni) throws SQLException{
+     
+        Connection con = conexion;
+         
+        String consulta = "select * from clientes where dni=?";
+        PreparedStatement stmt= con.prepareStatement(consulta);
+        stmt.setString(1,dni);
+        ResultSet rs = stmt.executeQuery();
+        return rs;   
+     }
+     
+      public static void actualizarNumeroAnalisis(String dni) throws SQLException{    
+          
+        Connection con = conexion;
+         
+        String consulta = "select * from clientes where dni=?";
+        PreparedStatement stmt= con.prepareStatement(consulta);
+        stmt.setString(1,dni);
+        ResultSet rs = stmt.executeQuery();
+        
+        int numAnalisis=0;
+        while (rs.next()) {
+            numAnalisis=rs.getInt("numerodeanalisis");         
+        }
+        
+        numAnalisis++;
+         
+        PreparedStatement stmtr = con.prepareStatement("update clientes set numerodeanalisis=? where dni=?");
+        
+        stmtr.setInt(1,numAnalisis);
+        stmtr.setString(2,dni);
+        
+        stmtr.executeUpdate();
+        
+        System.out.println("Numero de Analisis actualizado");
+     }
+     
+     
 }
 
    
